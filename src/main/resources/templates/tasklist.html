@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>List of tasks</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<h1 th:inline="text">Hello, [[${#httpServletRequest.remoteUser}]]!</h1>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
+<form action="/find" method="post">
+    <div>Номер заказа:</div>
+    <input title="task" type="text" name="orderId">
+    <input type="submit" value="Найти">`
+</form>
+<table>
+    <thead>
+    <tr>
+        <th> ID </th>
+        <th> Order ID </th>
+        <th> Date </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${tasks.empty}">
+        <td colspan="2"> Нет доступных задач </td>
+    </tr>
+    <tr th:each="task : ${tasks}">
+        <td><span th:text="${task.id}"> ID </span></td>
+        <td><span th:text="${task.orderId}"> OrderID </span></td>
+        <td><span th:text="${task.dateTime}"> Date </span></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
